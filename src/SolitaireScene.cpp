@@ -6,6 +6,7 @@
 
 #include <QDebug>
 #include <QtGui>
+#include <QGraphicsSceneMouseEvent>
 
 #include "Card.h"
 #include "CardDeck.h"
@@ -176,7 +177,8 @@ void SolitaireScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     }
     else {
         // Store selected graphicitem
-        m_activeGraphicItem = itemAt(mouseEvent->scenePos());
+        const QPointF sp = mouseEvent->scenePos();
+        m_activeGraphicItem = itemAt(sp.x(), sp.y(), QTransform());
     }
 
     // Sends mouse events into graphics items
